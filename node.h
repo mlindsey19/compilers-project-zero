@@ -8,9 +8,10 @@
 
 typedef struct node
 {
-    int data;
-    struct node* left;
-    struct node* right;
+    char ** dataArray;
+    int setCount;
+    struct node* leftChild;
+    struct node* rightChild;
 } node;
 
 #endif //P0_NODE_H

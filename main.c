@@ -9,11 +9,14 @@
 #include <assert.h>
 
 #include "checkArgs.h"
+#include "tree.h"
+#include "traversals.h"
 
 int main (int argc, char **argv){
 
     printf("%i\n",argc);
     checkArgs( argc, argv);
+    node * root = NULL;
 
     if (argc > 2){
         perror("too many arguments");
@@ -29,8 +32,10 @@ int main (int argc, char **argv){
         while (eoff >= 0) {
             eoff = fscanf(fp, "%s", ch); // fail returns neg number to eoff
             printf("%s\n", ch);
+            insertNode(root, ch);
         }
     }
+    inOrder(root);
 
     return 0;
 }

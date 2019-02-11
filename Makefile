@@ -4,7 +4,7 @@
 
 CC = gcc
 CFLAGS = -g -Wall
-OBJ = main.o traversals.o buildTree.o tree.o checkArgs.o
+OBJ = main.o traversals.o tree.o checkArgs.o
 .SUFFIXES: .c .o
 
 P0: $(OBJ)
