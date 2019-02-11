@@ -21,10 +21,10 @@ int main (int argc, char **argv){
     if (argc > 2){
         perror("too many arguments");
     }
+    FILE * fp = fopen("P0_test3.input1", "r");
     if (argc == 1){
         char  ch[32] ="";
         int eoff = 0; //end of file flag
-        FILE * fp = fopen("P0_test3.input1", "r");
         if (!fp) {
             perror("rf: could not open file");
             return 1;
@@ -32,9 +32,10 @@ int main (int argc, char **argv){
         while (eoff >= 0) {
             eoff = fscanf(fp, "%s", ch); // fail returns neg number to eoff
             printf("%s\n", ch);
-            insertNode(root, ch);
+           root = insertNode(root, ch);
         }
     }
+    fclose(fp);
     inOrder(root);
 
     return 0;

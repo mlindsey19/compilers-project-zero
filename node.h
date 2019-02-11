@@ -8,10 +8,11 @@
 
 typedef struct node
 {
-    char ** dataArray;
     int setCount;
-    struct node* leftChild;
-    struct node* rightChild;
+    struct node * leftChild;
+    struct node * rightChild;
+    char  * dataArray[]; // this grows dynamically so it must be and the end of struct
+
 } node;
 
 #endif //P0_NODE_H

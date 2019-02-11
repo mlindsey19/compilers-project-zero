@@ -8,43 +8,43 @@
 
 void inOrder(node *root)
 {
-    node *cursor, *pre;
+    node *curentNode, *parentNode;
 
     if(root == NULL)
         return;
 
-    cursor = root;
+    curentNode = root;
 
-    printf("  %s\n", cursor->dataArray[0]);
+    printf("  %s\n", curentNode->dataArray[0]);
 
-    while(cursor != NULL)
+    while(curentNode != NULL)
     {
-        if(cursor->leftChild != NULL)
+        if(curentNode->leftChild != NULL)
         {
 
-            cursor = cursor->rightChild;
-            printf("1  %s\n", cursor->dataArray[0]);
+            curentNode = curentNode->rightChild;
+            printf("1  %s\n", curentNode->dataArray[0]);
 
         }
         else
         {
-            pre = cursor->leftChild;
+            parentNode = curentNode->leftChild;
 
-            while(pre->rightChild != NULL && pre->rightChild != cursor)
-                pre = pre->rightChild;
+            while(parentNode->rightChild != NULL && parentNode->rightChild != curentNode)
+                parentNode = parentNode->rightChild;
 
-            if (pre->rightChild != NULL)
+            if (parentNode->rightChild != NULL)
             {
-                pre->rightChild = cursor;
-                cursor = cursor->leftChild;
-                printf("2  %s\n", cursor->dataArray[0]);
+                parentNode->rightChild = curentNode;
+                curentNode = curentNode->leftChild;
+                printf("2  %s\n", curentNode->dataArray[0]);
 
             }
             else
             {
-                pre->rightChild = NULL;
-                cursor = cursor->rightChild;
-                printf("3  %s\n", cursor->dataArray[0]);
+                parentNode->rightChild = NULL;
+                curentNode = curentNode->rightChild;
+                printf("3  %s\n", curentNode->dataArray[0]);
 
             }
         }
