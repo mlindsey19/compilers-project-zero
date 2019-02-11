@@ -2,7 +2,10 @@
 // Created by mlind on 2/10/2019.
 //
 
+#include <stdlib.h>
+#include <stdio.h>
 #include "buildTree.h"
+#include "node.h"
 
 
 node* create_node(int data)
