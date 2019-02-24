@@ -14,7 +14,7 @@
 
 int main (int argc, char **argv){
 
-    printf("%i\n",argc);
+    printf("num of args: %i\n",argc);
     checkArgs( argc, argv);
     node * root = NULL;
 
@@ -31,7 +31,6 @@ int main (int argc, char **argv){
         }
         while (eoff >= 0) {
             eoff = fscanf(fp, "%s", ch); // fail returns neg number to eoff
-            printf("%s\n", ch);
            root = insertNode(root, ch);
         }
     }

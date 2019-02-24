@@ -6,5 +6,5 @@
 #define P0_TRAVERSALS_H
 #include "node.h"
 
-void inOrder(node*);
+void inOrder(node *);
 #endif //P0_TRAVERSALS_H

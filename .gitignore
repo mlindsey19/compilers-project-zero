@@ -1,6 +1,10 @@
 cmake-build-debug-wsl/
 cmake-build-debug/
 CMakeLists.txt
+CMakeCache.txt
+CMakeFiles/
+P0.cbp
+cmake_install.cmake
 
 .idea/
 

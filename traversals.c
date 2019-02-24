@@ -6,47 +6,37 @@
 #include <stdio.h>
 #include "traversals.h"
 
-void inOrder(node *root)
+static void printNode(node *node ){
+    int i;
+    for (i = 0; i < node->depth; i++)
+        printf("  ");
+    for (i = 0; i < node->setCount; i++)
+        printf("%s ", node->dataArray[i]);
+    putchar('\n');
+
+}
+
+void inOrder(node *node)
 {
-    node *curentNode, *parentNode;
-
-    if(root == NULL)
-        return;
-
-    curentNode = root;
-
-    printf("  %s\n", curentNode->dataArray[0]);
-
-    while(curentNode != NULL)
-    {
-        if(curentNode->leftChild != NULL)
-        {
-
-            curentNode = curentNode->rightChild;
-            printf("1  %s\n", curentNode->dataArray[0]);
-
-        }
-        else
-        {
-            parentNode = curentNode->leftChild;
-
-            while(parentNode->rightChild != NULL && parentNode->rightChild != curentNode)
-                parentNode = parentNode->rightChild;
-
-            if (parentNode->rightChild != NULL)
-            {
-                parentNode->rightChild = curentNode;
-                curentNode = curentNode->leftChild;
-                printf("2  %s\n", curentNode->dataArray[0]);
-
-            }
-            else
-            {
-                parentNode->rightChild = NULL;
-                curentNode = curentNode->rightChild;
-                printf("3  %s\n", curentNode->dataArray[0]);
-
-            }
-        }
-    }
+    if ( node->leftChild != NULL )
+        inOrder(node->leftChild);
+    printNode(node);
+    if (node->rightChild != NULL)
+        inOrder(node->rightChild);
+}
+void preOrder(node *node)
+{
+    printNode(node);
+    if ( node->leftChild != NULL )
+        preOrder(node->leftChild);
+    if (node->rightChild != NULL)
+        preOrder(node->rightChild);
+}
+void postOrder(node *node)
+{
+    if ( node->leftChild != NULL )
+        postOrder(node->leftChild);
+    if (node->rightChild != NULL)
+        postOrder(node->rightChild);
+    printNode(node);
 }

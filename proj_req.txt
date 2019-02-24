@@ -1,5 +1,6 @@
 cs4280 spring2019
 
+
 Programming refreshment, practice with standards and header files, practice with trees, traversals, command line arguments, and file IO.
 
 Note: command line arguments and keyboard input can directly be reused in the later compiler project so make it well.
@@ -71,7 +72,7 @@ Using top-down decomposition you have 3 tasks in main:
 Process command arguments, set up file to work regardless of source, check if file readable, set the basename for the output file, etc.
 Build the tree
 Traverse the tree three different ways generating outputs
-The main function should handle the 3 functionalities. #1 should be handled inside of main, functions for #2 and #3 should be in another separate source as indicated. Any node types should be defined in a separate header file.
+The main function should handle the 3 functionalities. #1 should be handled inside of main, functions for #2 and #3 should be in another separate source as indicated. Any node types should be defined in a separate header file.   
 
 For development purposes, do either 1 or 2 first. 3 should follow 2, first with one traversal only.
 
@@ -79,32 +80,31 @@ Processing either keyboard or file input can be done one of these two ways:
 
 If keyboard input, read the input into temporary file, after which the rest of the program always processes file input
 If keyboard input, set file pointer to stdin otherwise set file pointer to the actual file, then process always from the file pointer
-Files:
+Files: 
 
 node.h, main.c, tree.c+tree.h, makefile
 main.c
 #include "node.h"
-#include "traversals.h"
-#include "buildTree.h"
+#include "tree.h"
 int main(int argc, char* argv[]) {
   // process command line arguments and make sure file is readable, error otherwise
   // set up keyboard processing so that below the input is not relevant
 
 node_t *root = buildTree(file);
-traversalPreorder(root);
-traversalInorder(root);
-traversalPostorder(root);
+printPreorder(root);
+printInorder(root);
+printPostorder(root); 
 return 0;
 }
 
 Ideas for printing tree with indentations
 
-static void printParseTree(nodeType *rootP,int level) {
+static void printPreorder(nodeType *rootP,int level) {
   if (rootP==NULL) return;
   printf("%*c%d:%-9s ",level*2,' ',level,NodeId.info); // assume some info printed as string
   printf("\n");
-  printParseTree(rootP->child1,level+1);
-  printParseTree(rootP->child2,level+1);
+  printPreorder(rootP->child1,level+1);
+  printPreorder(rootP->child2,level+1);
 }
 
 Testing
@@ -123,7 +123,7 @@ Run the invocations and check against predictions
 $ P0 < P0_test1
 Error
 $ P0 < P0_test3.input1
-Outputs out.inorder out.preorder out.postorder, each containing
+Outputs out.inorder out.preorder out.postorder, each containing 
 the stings (no repetitions)
 $ P0 P0_test3
 Outputs P0_test3.inorder P0_test3.preorder P0_test3.postorder containing as above

@@ -21,14 +21,14 @@ static int compare(char left,char right)
     left = (char) tolower(left);
     right = (char) tolower(right);
     if(left > right)
-        return 1;
-    if(left < right)
         return -1;
+    if(left < right)
+        return 1;
     return 0; // equal
 }
 
 static int isInSet(node * node,  char * data){
-    int i = 0;
+    int i;
     for (i=0; i < node->setCount; i++){
         if( !strcmp(data, node->dataArray[i]))
             return 1;
@@ -42,75 +42,70 @@ static int isInSet(node * node,  char * data){
  */
 
 static void appendDataToSet(node * node, char * data){
-    if(node->setCount > 0)
-        if( isInSet(node, data) )
-            exit(0);
-    size_t numberOfChars = strlen(data);
-    size_t size = sizeof( char *) * (++node->setCount);//new size of array and size effect: increment count
-    if (node->setCount == 1){ assert(node->setCount == 1); // does char work instead of char*
-       *node->dataArray = malloc(size);
-        node->dataArray[0] = malloc(numberOfChars);
-        strncpy(node->dataArray[0], data, numberOfChars);
-    } else {
-        *node->dataArray = realloc(*node->dataArray, size);
-        node->dataArray[node->setCount] = malloc(numberOfChars);
-        strncpy(node->dataArray[node->setCount], data, numberOfChars);
-
-    }
-
+    if(node->setCount == 0 || !isInSet(node, data) )
+            strcpy(node->dataArray[node->setCount++], data);
 }
 
 /*
     create a new node
 */
-node* createNode(char * data )
+node* createNode(char * data)
 {
-    node *new_node = (node*)malloc(sizeof(node));
-    if(new_node == NULL)
+    node *newNode = (node*)malloc(sizeof(node));
+    if(newNode == NULL)
     {
         fprintf (stderr, "Out of memory!!! (create_node)\n");
         exit(1);
     }
-    new_node->setCount = 0;
-    appendDataToSet(new_node, data);
-    new_node->leftChild = NULL;
-    new_node->rightChild = NULL;
-    return new_node;
+    newNode->setCount = 0;
+    newNode->depth = 0;
+    appendDataToSet(newNode, data);
+
+    newNode->leftChild = NULL;
+    newNode->rightChild = NULL;
+    return newNode;
 }
 
 /*
     insert a new node into the BST
 */
-node* insertNode(node *root,  char * data) {
+node* insertNode(node *insRoot,  char * data) {
 
-    if (root == NULL) {
-        root = createNode(data);
-        return root;
+    if (insRoot == NULL) {
+        insRoot = createNode(data);
+        return insRoot;
     }
+    int depthOfNode = 0;
+
     int sem = 0; // comparison flag
     char currentNodeData, newData;
-    node * currentNode = root;
+    node * currentNode = insRoot;
     node * parentNode = NULL;
 
-    newData = data[0];
+    newData = data[0]; //first char
     while (currentNode != NULL) {
         currentNodeData = currentNode->dataArray[0][0];
         sem = compare(currentNodeData, newData);
         parentNode = currentNode;
         if (sem == 0) {
             appendDataToSet(currentNode, data);
-            return root;
+            currentNode->depth = depthOfNode;
+            return insRoot;
         }
+        depthOfNode++;
         if (sem < 0)
             currentNode = currentNode->leftChild;
         else
             currentNode = currentNode->rightChild;
+
     }
-    if (sem < 0)
+    if (sem < 0) {
         parentNode->leftChild = createNode(data);
-    else
+        parentNode->leftChild->depth = depthOfNode;
+    }else {
         parentNode->rightChild = createNode(data);
+        parentNode->rightChild->depth = depthOfNode;
+    }
 
-
-    return root;
+    return insRoot;
 }
