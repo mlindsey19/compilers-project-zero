@@ -7,4 +7,7 @@
 #include "node.h"
 
 void inOrder(node *);
+void preOrder(node *);
+void postOrder(node *);
+
 #endif //P0_TRAVERSALS_H

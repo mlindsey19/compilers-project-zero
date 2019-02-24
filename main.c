@@ -8,21 +8,20 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "checkArgs.h"
 #include "tree.h"
 #include "traversals.h"
 
 int main (int argc, char **argv){
 
     printf("num of args: %i\n",argc);
-    checkArgs( argc, argv);
+
     node * root = NULL;
 
     if (argc > 2){
         perror("too many arguments");
     }
     FILE * fp = fopen("P0_test3.input1", "r");
-    if (argc == 1){
+    if (argc >= 1){
         char  ch[32] ="";
         int eoff = 0; //end of file flag
         if (!fp) {
@@ -36,6 +35,8 @@ int main (int argc, char **argv){
     }
     fclose(fp);
     inOrder(root);
+    preOrder(root);
+    postOrder(root);
 
     return 0;
 }
