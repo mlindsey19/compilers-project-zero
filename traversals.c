@@ -4,11 +4,14 @@
 
 #include <stddef.h>
 #include <stdio.h>
+#include <string.h>
 #include "traversals.h"
 
 
 static void printNode(node *node){
     int i;
+    if(strlen(node->dataArray[0]) == 0 )
+        fprintf(outFilePtr,"File was empty");
     for (i = 0; i < node->depth; i++)
         fprintf(outFilePtr, "  ");
     for (i = 0; i < node->setCount; i++)

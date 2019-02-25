@@ -16,7 +16,7 @@ FILE * outFilePtr;
 
 int main (int argc, char **argv){
 
-    char ext[] = ".input1";
+    char ext[] = ".input1\0";
     char infile[32] = "out.input1\0";
 
 
@@ -38,7 +38,7 @@ int main (int argc, char **argv){
         fp = fopen(infile, "r");
     }
 
-    char  ch[32] ="";
+    char  ch[32] ="\0";
     int eoff = 0; //end of file flag
     if (!fp) {
         perror("rf: could not open file");
@@ -60,9 +60,9 @@ int main (int argc, char **argv){
     strncpy(outfileInOrd,infile, x);
     strncpy(outfilePreOrd,infile, x);
 
-    strcat(outfileInOrd, "\0");
-    strcat(outfilePreOrd, "\0");
-    strcat(outfilePostOrd, "\0");
+   outfileInOrd[x ] = NULL;
+    outfilePostOrd[x ] = NULL;
+    outfilePreOrd[x ] = NULL;
 
     strcat(outfileInOrd, ".inorder\0");
     strcat(outfilePreOrd, ".preorder\0");
