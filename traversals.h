@@ -10,4 +10,6 @@ void inOrder(node *);
 void preOrder(node *);
 void postOrder(node *);
 
+extern FILE * outFilePtr;
+
 #endif //P0_TRAVERSALS_H

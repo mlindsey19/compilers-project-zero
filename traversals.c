@@ -6,16 +6,16 @@
 #include <stdio.h>
 #include "traversals.h"
 
-static void printNode(node *node ){
+
+static void printNode(node *node){
     int i;
     for (i = 0; i < node->depth; i++)
-        printf("  ");
+        fprintf(outFilePtr, "  ");
     for (i = 0; i < node->setCount; i++)
-        printf("%s ", node->dataArray[i]);
-    putchar('\n');
+        fprintf(outFilePtr, "%s ", node->dataArray[i]);
+    fputc( '\n', outFilePtr);
 
 }
-
 void inOrder(node *node)
 {
     if ( node->leftChild != NULL )
